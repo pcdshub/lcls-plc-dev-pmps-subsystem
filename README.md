@@ -1,13 +1,8 @@
-lcls-twincat-template-project
+pmps-dev-subsysplc
 =============================
 
-This repository contains the standard files for starting a TwinCAT3 project and
-can be used as a template. 
+This project can be used as a working example of how to use the PMPS library to implement PMPS functionality in your application. It is also used as a way to develop new PMPS functionality/ device archetypes.
 
-For more documentation on integrating TwinCAT3 and git, please see our confluence page:
-https://confluence.slac.stanford.edu/display/PCDS/TwinCAT+3+Git+Setup+and+Best+Practices
+Actual unit tests for the PMPS are included in the PMPS library.
 
-When starting a new project
----------------------------
- - [ ] Customize this Readme.md to match your own project.
-
+A separate arbiter project contains an example arbiter deployment.
