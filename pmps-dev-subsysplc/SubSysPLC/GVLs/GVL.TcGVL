@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <GVL Name="GVL" Id="{d672c2ab-181d-0c46-19f7-6523b9629502}">
+    <Declaration><![CDATA[
+VAR_GLOBAL
+	g_fbArbiter1	:	FB_Arbiter;
+	g_fbArbiter2	:	FB_Arbiter;
+	{attribute 'TcLinkTo' := '.q_xFastFaultOut:=TIIB[PMPS_FFO]^Channel 1^Output'}
+	g_FastFaultOutput1	:	FB_HardwareFFOutput;
+	g_rTestingVelocity	:	LREAL := PMPS_GVL.VISIBLE_TEST_VELOCITY;
+	g_fbFFRegistry	:	FB_UsualSuspects;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="FB_DevMover" Id="{85dd7d8a-db33-4692-a78a-bfcf2b0a17b8}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_DevMover
+VAR_IN_OUT
+	Device: ST_Device;
+END_VAR
+
+VAR
+	DevMoverState: INT := 0;
+	getPosPtr    : POINTER TO Photon_Machine_Protection_System_Library.T_HashTableEntry := 0;(* Returned hash table entry position pointer *)
+	Pause : TON := (PT := T#5s);
+	StartAgain: R_TRIG;
+	Restart: BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+StartAgain(CLK:=Restart);
+Restart R= StartAgain.Q;
+IF StartAgain.Q THEN
+	DevMoverState := 0;
+END_IF
+
+CASE DevMoverState OF
+	0:
+		DevMoverState := 100;
+	100: //Go to first entry in the state table
+		Device.StateTable.A_GetFirst();
+		//Device.nRequestedState := Device.StateTable.getValue.nStateRef;
+		getPosPtr := Device.StateTable.getPosPtr;
+		// Wait for move to complete
+		DevMoverState := 300;
+		
+	200: // Wait for move
+		
+		// Once move is done, go to next entry in state table
+		Pause(IN := Device.nActiveState = Device.nTargetState);
+		IF Pause.Q THEN
+			DevMoverState := 300;
+		END_IF
+(*		
+	250: // Move to upper limit
+	
+	251: // Move to lower limit
+*)	
+	300: // Go to next entry
+		Device.StateTable.A_GetNext(putPosPtr:=getPosPtr);
+		
+		// Go back to wait for move unless there are no more entries
+		IF Device.StateTable.bOk AND (Device.StateTable.getValue.nStateRef <> Device.nRequestedState) THEN
+			Device.nRequestedState := Device.StateTable.getValue.nStateRef;
+			getPosPtr := Device.StateTable.getPosPtr;
+			DevMoverState := 200;
+		ELSE
+			DevMoverState := 100;
+		END_IF
+		
+	
+END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

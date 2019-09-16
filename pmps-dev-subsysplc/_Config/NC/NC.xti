@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmItem" TcSmVersion="1.0" TcVersion="3.1.4022.30" ClassName="CNcSafTaskDef" SubType="0">
+	<NC>
+		<SafTask Priority="4" CycleTime="20000" AmsPort="501" IoAtBegin="true" AmsNetId="5.40.55.128.1.1">
+			<Name>NC-Task 1 SAF</Name>
+			<Vars VarGrpType="1" InsertType="1">
+				<Name>Inputs</Name>
+			</Vars>
+			<Vars VarGrpType="2" InsertType="1">
+				<Name>Outputs</Name>
+			</Vars>
+			<Image Id="3" AddrType="1" ImageType="1">
+				<Name>Image</Name>
+			</Image>
+		</SafTask>
+		<SvbTask Priority="8" CycleTime="100000" AmsPort="511" ExceedWarning="1">
+			<Name>NC-Task 1 SVB</Name>
+		</SvbTask>
+		<AxisFolder Name="DevRunner"/>
+		<Axis File="DevRunner_1.xti" Id="3"/>
+		<Axis File="DevRunner_2.xti" Id="4"/>
+		<Axis File="DevRunner_3.xti" Id="5"/>
+		<Axis File="DevRunner_4.xti" Id="6"/>
+		<Axis File="DevRunner_5.xti" Id="7"/>
+		<Axis File="DevRunner_6.xti" Id="8"/>
+		<Axis File="DevRunner_7.xti" Id="9"/>
+		<Axis File="DevRunner_8.xti" Id="10"/>
+		<Axis File="Dev1.xti" Id="1"/>
+		<Axis File="Dev2.xti" Id="2"/>
+	</NC>
+</TcSmItem>

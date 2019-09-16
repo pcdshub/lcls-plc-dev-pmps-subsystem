@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="MAIN" Id="{8dae6ad4-a151-0bba-099f-d898099b234a}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	fbDev1	:	FB_ExampleDeviceSM_All;
+	fbDev1Mover	:	FB_DevMover;
+	fbDev2	:	FB_ExampleDeviceSM_All;
+	fbDev2Mover	:	FB_DevMover;
+	
+	rtInit	:	R_TRIG;
+	Initialize	:	BOOL := TRUE;
+	
+	DevArray : ARRAY[1..8] OF FB_ExampleDeviceSM_All;
+	DevMoverArray : ARRAY [1..8] OF FB_DevMover;
+	
+	//fbDev3	:	FB_ExampleDeviceSM_DB;
+
+	DevRunnerInt: INT;
+	
+	AttemptReset	:	TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Sub-system Device PLC
+
+//Fast Faults must run first
+Fast_Faults_Setup();
+
+IF Initialize THEN
+	fbDev1(cBase := 10,
+		fbFastFaultOutput := g_FastFaultOutput1,
+		fbArbiter := g_fbArbiter1);
+	fbDev2(cBase := 1000,
+		fbFastFaultOutput := g_FastFaultOutput1,
+		fbArbiter := g_fbArbiter1);
+	g_fbArbiter1.A_Init();
+
+//	fbDev3(cBase := 0,iDBID:=1,sDBNetId:='172.21.42.53.1.1',sDeviceID:='1',
+//		fbArbiter := g_fbArbiter,
+//		fbFastFaultOutput := g_FastFaultOutput1);
+
+	FOR DevRunnerInt := 1 TO 8 DO
+		DevArray[DevRunnerInt](cBase := DevRunnerInt*1000,
+			fbFastFaultOutput := g_FastFaultOutput1,
+			fbArbiter := g_fbArbiter1);
+	END_FOR
+
+	Initialize := FALSE;
+END_IF
+
+//Example devices
+fbDev1(fbFastFaultOutput := g_FastFaultOutput1,
+		fbArbiter := g_fbArbiter1);
+fbDev2(fbFastFaultOutput := g_FastFaultOutput1,
+		fbArbiter := g_fbArbiter1);
+		
+fbDev1Mover(Device:=fbDev1.stDevice);
+fbDev2Mover(Device:=fbDev2.stDevice);
+
+FOR DevRunnerInt := 1 TO 8 DO
+	DevArray[DevRunnerInt](cBase := DevRunnerInt*1000,
+		fbFastFaultOutput := g_FastFaultOutput1,
+		fbArbiter := g_fbArbiter1);
+		
+	DevMoverArray[DevRunnerInt](Device := DevArray[DevRunnerInt].stDevice);	
+END_FOR
+		
+PMPS();
+
+Fast_Faults_Evaluate();
+]]></ST>
+    </Implementation>
+    <Action Name="Initialize" Id="{d1ade4b7-a3bb-05df-1130-655f7c382074}">
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Action>
+  </POU>
+</TcPlcObject>

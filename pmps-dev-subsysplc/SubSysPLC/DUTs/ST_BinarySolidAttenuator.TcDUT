@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="ST_BinarySolidAttenuator" Id="{54d17dbd-8c9a-0cb4-1431-bd0f47c4235d}">
+    <Declaration><![CDATA[TYPE ST_BinarySolidAttenuator :
+STRUCT
+	axBlades	: ARRAY [0..9] OF ST_SolidAttenuatorBlade;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

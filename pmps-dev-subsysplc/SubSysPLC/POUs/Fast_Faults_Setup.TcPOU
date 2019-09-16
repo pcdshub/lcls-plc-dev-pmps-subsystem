@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="Fast_Faults_Setup" Id="{93067724-c1c1-041e-2722-ce6a97c5027a}" SpecialFunc="None">
+    <Declaration><![CDATA[// Run at the start of each cycle
+
+PROGRAM Fast_Faults_Setup
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[g_FastFaultOutput1();]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
