@@ -24,9 +24,6 @@ END_VAR
     <Implementation>
       <ST><![CDATA[//Sub-system Device PLC
 
-//Fast Faults must run first
-Fast_Faults_Setup();
-
 IF Initialize THEN
 	fbDev1(cBase := 10,
 		fbFastFaultOutput := g_FastFaultOutput1,

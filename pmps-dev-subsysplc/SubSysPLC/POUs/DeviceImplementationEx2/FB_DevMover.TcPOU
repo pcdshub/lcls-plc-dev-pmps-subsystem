@@ -8,7 +8,7 @@ END_VAR
 
 VAR
 	DevMoverState: INT := 0;
-	getPosPtr    : POINTER TO Photon_Machine_Protection_System_Library.T_HashTableEntry := 0;(* Returned hash table entry position pointer *)
+	getPosPtr    : POINTER TO PMPS.T_HashTableEntry := 0;(* Returned hash table entry position pointer *)
 	Pause : TON := (PT := T#5s);
 	StartAgain: R_TRIG;
 	Restart: BOOL;

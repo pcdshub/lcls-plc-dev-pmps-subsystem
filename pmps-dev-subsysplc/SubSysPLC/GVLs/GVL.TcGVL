@@ -8,7 +8,6 @@ VAR_GLOBAL
 	{attribute 'TcLinkTo' := '.q_xFastFaultOut:=TIIB[PMPS_FFO]^Channel 1^Output'}
 	g_FastFaultOutput1	:	FB_HardwareFFOutput;
 	g_rTestingVelocity	:	LREAL := PMPS_GVL.VISIBLE_TEST_VELOCITY;
-	g_fbFFRegistry	:	FB_UsualSuspects;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
