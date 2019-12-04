@@ -3,30 +3,13 @@
   <POU Name="PMPS" Id="{9f17630a-fcaa-08bb-22bb-9b109c090d19}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM PMPS
 VAR
-	
-	{attribute 'TcLinkTo' := '.i_stBP:=TIIB[PMPS_IF]^IO Inputs^CurrentBP;
-                              .xTxPDO_toggle:=TIIB[PMPS_IF]^SYNC Inputs^TxPDO toggle;
-                              .xTxPDO_state:=TIIB[PMPS_IF]^SYNC Inputs^TxPDO state'}
-	fbBPFanout	:	FB_BeamParamFanout;
-	
-	{attribute 'TcLinkTo' := 'TIIB[PMPS_IF]^IO Outputs^RequestedBP'}
-	q_stReqBeamParams	AT %Q*	:	ST_BeamParams;
-	
-	fbBPRequestor	:	FB_BPRequestor;
-	
+    
+    fbArbiterIO : FB_SubSysToArbiter_IO;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-
-//Beam parameter requestor
-fbBPRequestor(stReqBP := g_fbArbiter1.GetArbitratedBP(),
-q_stReqBP=>q_stReqBeamParams);
-
-
-
-//Beam parameter fanout
-fbBPFanout();]]></ST>
+      <ST><![CDATA[fbArbiterIO(Arbiter := GVL.g_fbArbiter1, fbFFHWO := GVL.g_FastFaultOutput1);
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

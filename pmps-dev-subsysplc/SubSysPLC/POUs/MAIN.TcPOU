@@ -19,8 +19,13 @@ VAR
 	DevRunnerInt: INT;
 	
 	AttemptReset	:	TON;
+    
+    ffArray : ARRAY[1..FF_ARRAY] OF FB_FastFault;
+    FFRunnerInt : INT := 1;
 END_VAR
-]]></Declaration>
+VAR CONSTANT
+    FF_ARRAY : INT := 200;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[//Sub-system Device PLC
 
@@ -62,7 +67,11 @@ FOR DevRunnerInt := 1 TO 8 DO
 		
 	DevMoverArray[DevRunnerInt](Device := DevArray[DevRunnerInt].stDevice);	
 END_FOR
-		
+(*
+FOR FFRunnerInt := 1 to FF_ARRAY DO
+    ffArray[FFRunnerInt](io_fbFFHWO := g_FastFaultOutput1);
+END_FOR
+*)		
 PMPS();
 
 Fast_Faults_Evaluate();

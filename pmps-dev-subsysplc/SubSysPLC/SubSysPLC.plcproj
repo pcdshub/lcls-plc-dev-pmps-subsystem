@@ -67,10 +67,6 @@
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
-    <PlaceholderReference Include="PMPS">
-      <DefaultResolution>PMPS, * (SLAC - LCLS)</DefaultResolution>
-      <Namespace>PMPS</Namespace>
-    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_MC2">
       <DefaultResolution>Tc2_MC2, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_MC2</Namespace>
@@ -104,9 +100,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PlaceholderResolution Include="PMPS">
-      <Resolution>PMPS, * (SLAC - LCLS)</Resolution>
-    </PlaceholderResolution>
+    <LibraryReference Include="PMPS,0.0.0,SLAC - LCLS">
+      <Namespace>PMPS</Namespace>
+    </LibraryReference>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

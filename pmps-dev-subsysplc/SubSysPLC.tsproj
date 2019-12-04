@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4022.30">
-	<Project ProjectGUID="{254D3CAC-035C-4517-B1D9-2A6D8C3695B2}" TargetNetId="5.50.2.138.1.1" ShowHideConfigurations="#x306">
+	<Project ProjectGUID="{254D3CAC-035C-4517-B1D9-2A6D8C3695B2}" TargetNetId="172.21.149.37.1.1" RelativeTargetNetId="true" RelativeIpAddresses="true" ShowHideConfigurations="#x306">
 		<System>
 			<Settings>
 				<IoIdleTask Priority="3"/>
 			</Settings>
+			<Licenses>
+				<Target>
+					<ManualSelect>{3EBB9639-5FF3-42B6-8847-35C70DC013C8}</ManualSelect>
+				</Target>
+			</Licenses>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" ExceedWarning="1" AdtTasks="true">
 					<Name>PlcTask</Name>
